@@ -144,7 +144,7 @@ class NiftiPairImageGenerator(Dataset):
 
     def resize_img_4d(self, input_img):
         h, w, d, c = input_img.shape
-        result_img = np.zeros((self.input_size, self.input_size, self.depth_size, 2))
+        result_img = np.zeros((self.input_size, self.input_size, self.depth_size, 4))
         if h != self.input_size or w != self.input_size or d != self.depth_size:
             for ch in range(c):
                 buff = input_img.copy()[..., ch]
