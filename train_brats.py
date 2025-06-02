@@ -88,10 +88,12 @@ diffusion = GaussianDiffusion(
     channels=out_channels
 ).cuda()
 
-if len(resume_weight) > 0:
+if resume_weight and os.path.exists(resume_weight):
     weight = torch.load(resume_weight, map_location='cuda')
     diffusion.load_state_dict(weight['ema'])
-    print("Model Loaded!")
+    print("Model Loaded from", resume_weight)
+else:
+    print("No pretrained weights loaded. Training from scratch.")
 
 trainer = Trainer(
     diffusion,
